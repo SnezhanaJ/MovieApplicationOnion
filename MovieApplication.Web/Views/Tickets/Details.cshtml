@@ -1,0 +1,32 @@
+﻿@model MovieApplication.Domain.DTO.AddToTicketInOrderDto
+
+@{
+    ViewData["Title"] = "Add To Order";
+}
+
+<div class="container">
+    <form method="post" asp-action="Details">
+
+        <input type="hidden" asp-for="TicketId" value="@Model.TicketId" class="form-control" />
+
+        <div class="row mt-4">
+            <div class="form-group">
+                <label asp-for="SelectedTicket.Movie.MovieName" class="control-label"></label>
+                <input disabled asp-for="SelectedTicket.Movie.MovieName" class="form-control" />
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="form-group">
+                <label asp-for="NumberOrTickets" class="control-label"></label>
+                <input asp-for="NumberOrTickets" type="number" class="form-control" />
+                <span asp-validation-for="NumberOrTickets" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <button type="submit" class="btn btn-success">Add To Cart</button>
+        </div>
+    </form>
+
+</div>

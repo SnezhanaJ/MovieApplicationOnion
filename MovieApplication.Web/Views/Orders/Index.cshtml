@@ -1,0 +1,59 @@
+﻿@model MovieApplication.Domain.DTO.TicketInOrderDto
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container">
+
+    <div class="row-4">
+        <a asp-controller="Orders" asp-action="OrderNow" class="btn btn-info">Order now</a>
+    </div>
+
+    <div class="row m-4">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Movie Name</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Movie Price</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.allTickets.Count == 0)
+                {
+                    <tr>
+                        <td colspan="5">No active Tickets</td>
+                    </tr>
+                }
+                else
+                {
+                    @for (int i = 0; i < Model.allTickets.Count; i++)
+                    {
+                        var item = Model.allTickets[i];
+
+                        <tr>
+                            <th scope="row">@(i + 1)</th>
+                            <td>@item.Ticket.Movie.MovieName</td>
+                            <td>@item.NumberOfTickets</td>
+                            <td>$@item.Ticket.Price</td>
+                            <td><a asp-controller="Orders" asp-action="DeleteFromOrder" asp-route-id="@item.Id" class="btn btn-danger">Delete From Order</a></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+            <tfoot class="thead-dark">
+                <tr>
+                    <th scope="col">TotalPrice:</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col">$@Model.totalPrice</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+</div>
